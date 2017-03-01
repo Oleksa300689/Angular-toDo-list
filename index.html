@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+    <script src="app/controllers/main.controller.js"></script>
+    <script src="app/app.js"></script>
+    <style>
+    
+        body, table{
+            background: gray;
+        }
+    
+    </style>
+</head>
+<body>
+    <!--{{2+2}}-->
+    
+    <div class="container" ng-controller="mainCtrl as main">
+        <h1>Plan your day!</h1>
+        
+        <h3>User: {{main.tasks.user}}</h3>
+        <h3>Number of tasks: {{main.tasks.userTasks.length}}</h3>
+        
+        <div class="panel">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Add your task..." ng-model="newTask">
+            
+            
+                <span class="input-group-btn">
+                    <input type="button" value="Add" class="btn btn-success" ng-click="main.addTask(newTask)">
+                </span>
+            
+            </div>
+            
+            <table class="table">
+                
+                <thead>
+                    <th>Deleting</th>
+                    <th>Task</th>
+                    <th>Check</th>
+                    <th>Done/In progress</th>
+                    <th>Edit</th>
+                </thead>
+                
+                <tbody>
+                    <tr ng-repeat="key in main.tasks.userTasks">
+                        <td>
+                            <input type="button" value="Delete" class="btn btn-danger" ng-click="main.deleteTask($index)">
+                        </td>
+                        <td>{{key.name}}</td>
+                        <td>
+                            <input type="checkbox" ng-click="main.checkboxModel($index)">
+                        </td>
+                        <td>{{key.done}}</td>
+                        <td>
+                            <input type="button" value="Edit" class="btn btn-success" ng-click="main.editTask($index)">
+                        </td>
+                    </tr>
+                       <tr ng-show="main.editMenu">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <input type="text" class="form-control edit" ng-model="main.edited">
+                            </td>
+                            <td>
+                                <input type="button" value="Save" class="btn btn-success" ng-click="main.saveTask()">
+                            </td>
+                        </tr>
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
+    
+    
+    
+    
+</body>
+</html>
